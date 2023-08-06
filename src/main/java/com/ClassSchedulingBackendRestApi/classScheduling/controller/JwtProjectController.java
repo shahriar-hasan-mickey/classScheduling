@@ -4,20 +4,22 @@ import com.ClassSchedulingBackendRestApi.classScheduling.model.Student;
 import com.ClassSchedulingBackendRestApi.classScheduling.repository.StudentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin (origins = "*" , exposedHeaders = "*")
+@RequestMapping(method = {RequestMethod.GET, RequestMethod.OPTIONS})
 @RestController
 public class JwtProjectController {
 
     @Autowired
     private StudentsRepository studentsRepository;
 
-    @RequestMapping({"/jwtProject"})
+
+    @CrossOrigin(origins = "*")
+//    @GetMapping({"/jwtProject"})
+    @RequestMapping(value = "/jwtProject", method = {RequestMethod.GET, RequestMethod.OPTIONS})
     public String firstPage(){
         return "Hello World from JWT PROJECT";
     }
@@ -68,18 +70,18 @@ public class JwtProjectController {
 
 
     @GetMapping("/sortByLastnameASC")
-    List<Student> findBySortingLastnameASC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.ASC, "lastname")); }
+    List<Student> findBySortingLastnameASC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.ASC, "lastName")); }
 
     @GetMapping("/sortByFirstnameASC")
-    List<Student> findBySortingFirstnameASC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.ASC, "firstname")); }
+    List<Student> findBySortingFirstnameASC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName")); }
 
 
 
     @GetMapping("/sortByLastnameDESC")
-    List<Student> findBySortingLastnameDESC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.DESC, "lastname")); }
+    List<Student> findBySortingLastnameDESC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.DESC, "lastName")); }
 
     @GetMapping("/sortByFirstnameDESC")
-    List<Student> findBySortingFirstnameDESC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.DESC, "firstname")); }
+    List<Student> findBySortingFirstnameDESC(){ return studentsRepository.findAll(Sort.by(Sort.Direction.DESC, "firstName")); }
 
 
 
